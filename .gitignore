@@ -1,0 +1,110 @@
+# ----------------------------------------
+# Python Bytecode, Cache, Virtualenvs
+# ----------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*$py.class
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# model file
+models/
+outputs/
+__pycache__/
+*.pyc
+*.pkl
+*.mp4
+
+# Pip / Poetry
+*.egg-info/
+*.egg
+.installed.cfg
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Distribution / Build
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+MANIFEST
+
+# ----------------------------------------
+# IDEs and Editors
+# ----------------------------------------
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ----------------------------------------
+# Jupyter / IPython
+# ----------------------------------------
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# ----------------------------------------
+# Pytest / Coverage / Tox
+# ----------------------------------------
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache/
+.hypothesis/
+
+# ----------------------------------------
+# Sphinx Docs
+# ----------------------------------------
+docs/_build/
+
+# ----------------------------------------
+# Flask / Django / Web Apps
+# ----------------------------------------
+instance/
+.webassets-cache
+*.log
+local_settings.py
+db.sqlite3
+
+# ----------------------------------------
+# Static Files (optional)
+# ----------------------------------------
+outputs/
+*.mp4
+*.png
+*.webm
+
+# ----------------------------------------
+# Misc
+# ----------------------------------------
+*.manifest
+*.spec
+celerybeat-schedule
+.mypy_cache/
+.dmypy.json
+.pyre/
