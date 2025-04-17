@@ -77,7 +77,7 @@ Place them into the `./models/` folder.
 
 ### ✨ Run the app:
 ```bash
-python scripts/fullbody_gan_app.py
+python fullbody_gan_app.py
 ```
 
 A **Gradio UI** will appear in your browser.
