@@ -56,6 +56,27 @@ def nms(pred, conf_thres, iou_thres, max_instance=20):
                 result[i].append([score, box])
     return result
 
+# ─── 追加する関数 ──────────────────────────────
+def gen_batch_images_fn(num_images, psi):
+    """
+    ランダムシードで num_images 枚の画像を生成し、
+    outputs/images フォルダにPNGで保存、画像リストを返します。
+    """
+    num_images = int(num_images)
+    seeds = np.random.randint(0, 2**31, size=num_images)
+    imgs = []
+    for seed in seeds:
+        # zベクトル生成
+        z = np.random.RandomState(int(seed) + 2**31).randn(1, model.z_dim).astype(np.float32)
+        # w空間にマッピング＆画像取得
+        w = model.get_w(z, psi)
+        img = model.get_img(w)
+        # PNGで保存
+        filepath = f"outputs/images/seed_{seed}_psi_{psi:.2f}.png"
+        imageio.imwrite(filepath, img)
+        imgs.append(img)
+    return imgs
+
 # --------------------------- Model wrapper ---------------------------
 
 class Model:
@@ -169,13 +190,37 @@ with app:
                     seq_frame_slider = gr.Slider(minimum=10, maximum=60, step=1, value=30, label="frames per transition")
                     seq_generate_button = gr.Button("Generate sequence video")
                 with gr.Column():
-                    seq_images_gallery = gr.Gallery(label="generated images").style(grid=[2], height="auto")
                     seq_video_output = gr.Video()
+                    seq_images_gallery = gr.Gallery(label="generated images").style(grid=[2], height="auto")
 
             seq_generate_button.click(
                 gen_sequence_fn,
                 [seq_num_slider, seq_psi_slider, seq_frame_slider],
                 [seq_images_gallery, seq_video_output]
+            )
+
+        # ─── Gradioタブの追加 ───────────────────────────
+        with gr.TabItem("batch generate images"):
+            with gr.Row():
+                with gr.Column():
+                    gr.Markdown("## シードごとにPNG画像を一括生成にゃん♪")
+                    batch_num_slider = gr.Slider(
+                        minimum=1, maximum=1000, step=1, value=4,
+                        label="生成枚数（number of images）"
+                    )
+                    batch_psi_slider = gr.Slider(
+                        minimum=0.0, maximum=1.0, step=0.01, value=0.6,
+                        label="truncation ψ"
+                    )
+                    batch_generate_button = gr.Button("Generate batch")
+                with gr.Column():
+                    batch_images_gallery = gr.Gallery(
+                        label="generated images"
+                    ).style(grid=[4], height="auto")
+            batch_generate_button.click(
+                gen_batch_images_fn,
+                [batch_num_slider, batch_psi_slider],
+                [batch_images_gallery]
             )
         # --------------------- Image generation tab ---------------------
         with gr.TabItem("generate image"):
