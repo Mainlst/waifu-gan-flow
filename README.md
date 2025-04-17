@@ -33,10 +33,10 @@ waifu-gan-onnx/
 │   ├── g_mapping.onnx
 │   └── g_synthesis.onnx
 ├── scripts/
-│   └── fullbody_gan_app.py     # Gradio interface
 ├── outputs/
 │   ├── images/                 # Saved PNGs
 │   └── videos/                 # Saved MP4s
+├── fullbody_gan_app.py     # Gradio interface
 ├── requirements.txt
 ├── environment.yml
 ├── LICENSE
