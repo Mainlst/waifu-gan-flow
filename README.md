@@ -1,4 +1,5 @@
 # 🌊 Waifu-GAN-Flow
+![2025-04-17_23-47-10_1](https://github.com/user-attachments/assets/6b0e7113-a6eb-4bdb-9922-7c64456fad73)
 
 > Smoothly animate full-body anime characters using latent interpolation from skytnt/waifu-gan.
 
