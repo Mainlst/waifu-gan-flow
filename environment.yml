@@ -1,4 +1,4 @@
-name: stylegan3
+name: waifu-gan
 channels:
   - conda-forge
   - anaconda
