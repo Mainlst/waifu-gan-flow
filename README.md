@@ -1,6 +1,9 @@
 # 🌊 Waifu-GAN-Flow
 ![2025-04-17_23-47-10_1](https://github.com/user-attachments/assets/6b0e7113-a6eb-4bdb-9922-7c64456fad73)
-[`You can try it here`](https://huggingface.co/spaces/synonym/waifu-gan-flow)
+
+This app can be published and run on Hugging Face Spaces:
+
+👉 [waifu-gan-flow on Hugging Face Spaces](https://huggingface.co/spaces/synonym/waifu-gan-flow)
 
 > Smoothly animate full-body anime characters using latent interpolation from skytnt/waifu-gan.
 
