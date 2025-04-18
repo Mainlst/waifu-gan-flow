@@ -133,7 +133,7 @@ This project is licensed under the [Apache License 2.0](LICENSE).
 
 ## ✨ Sample Output
 
-![waifu-sample](https://huggingface.co/skytnt/waifu-gan/resolve/main/sample.png)
+![waifu-sample](https://github.com/user-attachments/assets/a25d1314-3c12-43e5-ad8d-a090f00297b9)
 
 Enjoy generating and animating cute waifus with style 💕
 
