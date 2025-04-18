@@ -1,4 +1,9 @@
 # 🌊 Waifu-GAN-Flow
+![2025-04-17_23-47-10_1](https://github.com/user-attachments/assets/6b0e7113-a6eb-4bdb-9922-7c64456fad73)
+
+This app can be published and run on Hugging Face Spaces:
+
+👉 [waifu-gan-flow on Hugging Face Spaces](https://huggingface.co/spaces/synonym/waifu-gan-flow)
 
 > Smoothly animate full-body anime characters using latent interpolation from skytnt/waifu-gan.
 
@@ -32,10 +37,10 @@ waifu-gan-onnx/
 │   ├── g_mapping.onnx
 │   └── g_synthesis.onnx
 ├── scripts/
-│   └── fullbody_gan_app.py     # Gradio interface
 ├── outputs/
 │   ├── images/                 # Saved PNGs
 │   └── videos/                 # Saved MP4s
+├── fullbody_gan_app.py     # Gradio interface
 ├── requirements.txt
 ├── environment.yml
 ├── LICENSE
@@ -76,7 +81,7 @@ Place them into the `./models/` folder.
 
 ### ✨ Run the app:
 ```bash
-python scripts/fullbody_gan_app.py
+python fullbody_gan_app.py
 ```
 
 A **Gradio UI** will appear in your browser.
