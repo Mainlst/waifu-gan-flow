@@ -8,6 +8,12 @@ from numpy.random import RandomState
 from skimage import transform
 import os
 
+# fullbody_gan_app.py
+try:
+    import download_models
+except Exception as e:
+    print("Warning: Failed to auto-download models. Please check manually.", e)
+    
 # ------------------------- Utility functions -------------------------
 
 def get_inter(r1, r2):
@@ -191,7 +197,7 @@ with app:
                     seq_generate_button = gr.Button("Generate sequence video")
                 with gr.Column():
                     seq_video_output = gr.Video()
-                    seq_images_gallery = gr.Gallery(label="generated images").style(grid=[2], height="auto")
+                    seq_images_gallery = gr.Gallery(label="generated images", columns=2, height="auto")
 
             seq_generate_button.click(
                 gen_sequence_fn,
@@ -200,6 +206,7 @@ with app:
             )
 
         # ─── Gradioタブの追加 ───────────────────────────
+        # "batch generate images" タブの修正部分
         with gr.TabItem("batch generate images"):
             with gr.Row():
                 with gr.Column():
@@ -215,13 +222,15 @@ with app:
                     batch_generate_button = gr.Button("Generate batch")
                 with gr.Column():
                     batch_images_gallery = gr.Gallery(
-                        label="generated images"
-                    ).style(grid=[4], height="auto")
+                        label="generated images", columns=4, height="auto"
+                    )
+
             batch_generate_button.click(
                 gen_batch_images_fn,
                 [batch_num_slider, batch_psi_slider],
                 [batch_images_gallery]
             )
+
         # --------------------- Image generation tab ---------------------
         with gr.TabItem("generate image"):
             with gr.Row():
