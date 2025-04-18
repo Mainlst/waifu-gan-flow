@@ -13,7 +13,7 @@ try:
     import download_models
 except Exception as e:
     print("Warning: Failed to auto-download models. Please check manually.", e)
-    
+
 # ------------------------- Utility functions -------------------------
 
 def get_inter(r1, r2):
@@ -121,7 +121,14 @@ class Model:
 
     # --- video helpers ---
     def gen_video_pair(self, w1, w2, path, frame_num=10):
-        writer = imageio.get_writer(path, mode='I', fps=frame_num // 2, codec='libx264', bitrate='16M')
+        writer = imageio.get_writer(
+            path,
+            mode='I',
+            fps=frame_num // 2,
+            codec='libx264',
+            bitrate='16M',
+            format='ffmpeg'  # ← ここが重要！
+        )
         lin = np.linspace(0, 1, frame_num)
         for alpha in lin:
             img = self.get_img((1 - alpha) * w1 + alpha * w2)
@@ -129,13 +136,21 @@ class Model:
         writer.close()
 
     def gen_video_sequence(self, ws, path, frames_per_seg=15):
-        writer = imageio.get_writer(path, mode='I', fps=frames_per_seg // 2, codec='libx264', bitrate='16M')
+        writer = imageio.get_writer(
+            path,
+            mode='I',
+            fps=frames_per_seg // 2,
+            codec='libx264',
+            bitrate='16M',
+            format='ffmpeg'  # 忘れずに！
+        )
         lin = np.linspace(0, 1, frames_per_seg)
         for i in range(len(ws) - 1):
             for alpha in lin:
                 img = self.get_img((1 - alpha) * ws[i] + alpha * ws[i + 1])
                 writer.append_data(img)
         writer.close()
+
 
 # --------------------------- Generation logic ---------------------------
 

@@ -24,6 +24,7 @@ huggingface-hub==0.30.2
 humanfriendly==10.0
 idna
 imageio==2.37.0
+imageio-ffmpeg==0.6.0
 importlib_resources==6.5.2
 Jinja2==3.1.6
 jsonschema==4.23.0
@@ -41,12 +42,14 @@ numpy
 olefile
 onnx==1.17.0
 onnxruntime==1.19.2
+onnxruntime-gpu==1.19.2
 orjson==3.10.16
 packaging
 pandas==2.2.3
 pillow==10.4.0
 ply
 protobuf==6.30.2
+psutil==7.0.0
 pydantic==1.10.21
 pydantic_core==2.33.1
 pydub==0.25.1

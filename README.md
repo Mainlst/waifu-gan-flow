@@ -1,49 +1,42 @@
 # 🌊 Waifu-GAN-Flow
-![2025-04-17_23-47-10_1](https://github.com/user-attachments/assets/6b0e7113-a6eb-4bdb-9922-7c64456fad73)
 
-This app can be published and run on Hugging Face Spaces:
+![demo](https://github.com/user-attachments/assets/6b0e7113-a6eb-4bdb-9922-7c64456fad73)
 
+This app can also be deployed on Hugging Face Spaces:  
 👉 [waifu-gan-flow on Hugging Face Spaces](https://huggingface.co/spaces/synonym/waifu-gan-flow)
 
-> Smoothly animate full-body anime characters using latent interpolation from skytnt/waifu-gan.
+> Smoothly animate full-body anime characters using latent interpolation from [`skytnt/waifu-gan`](https://huggingface.co/skytnt/waifu-gan).
 
-**Waifu-GAN-Flow** is a lightweight toolkit built on top of [`skytnt/waifu-gan`](https://huggingface.co/skytnt/waifu-gan) that lets you:
-- 🎨 Generate high-quality anime-style characters
-- 🔁 Morph seamlessly between multiple waifus
-- 🎥 Export smooth latent-space videos
-
-Whether you're creating transitions from random seeds or interpolating encoded images, **flow** your waifus in style!
-
-<p align="center">
-  <img src="https://huggingface.co/skytnt/waifu-gan/resolve/main/sample.png" width="512"/>
-</p>
+**Waifu-GAN-Flow** is a lightweight ONNX-based toolkit that allows you to:
+- 🎨 Generate anime-style full-body characters
+- 🔁 Morph between characters using latent space interpolation
+- 🎥 Export smooth mp4 animations via Gradio UI
 
 ---
 
 ## 🚀 Features
 
-- ✅ **ONNX Runtime** for fast & portable inference
+- ✅ **ONNX Runtime GPU** for fast inference (CUDA supported)
 - 🎲 Latent space **random or seed-based generation**
-- 🎥 Smooth **video interpolation** between two latent vectors
-- 🖼 Simple **Gradio UI** for testing
+- 🎥 Interpolate between characters with smooth **transition videos**
+- 🖼 Simple **Gradio UI** with multiple tabs: image, batch, video, sequence
 
 ---
 
 ## 🗂 Directory Structure
 
 ```
-waifu-gan-onnx/
-├── models/              # ONNX models (not included here — see below)
+waifu-gan-flow/
+├── models/                  # ONNX models (must be downloaded)
 │   ├── g_mapping.onnx
 │   └── g_synthesis.onnx
-├── scripts/
 ├── outputs/
-│   ├── images/                 # Saved PNGs
-│   └── videos/                 # Saved MP4s
-├── fullbody_gan_app.py     # Gradio interface
+│   ├── images/              # Output PNGs
+│   └── videos/              # Output MP4s
+├── fullbody_gan_app.py      # Gradio app (entry point)
+├── download_models.py       # Optional: auto-download helper
 ├── requirements.txt
 ├── environment.yml
-├── LICENSE
 └── README.md
 ```
 
@@ -51,70 +44,97 @@ waifu-gan-onnx/
 
 ## 📦 Setup
 
-### 🔧 1. Clone & prepare environment
-```bash
-git clone https://github.com/Mainlst/waifu-gan-onnx.git
-cd waifu-gan-onnx
+### 🧪 Option 1: Conda (recommended)
 
-# (recommended) create a new environment
+```bash
+git clone https://github.com/Mainlst/waifu-gan-flow.git
+cd waifu-gan-flow
+
 conda env create -f environment.yml
 conda activate waifu-gan
 ```
 
-Or for pip users:
+### 📦 Option 2: Pip
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 📥 2. Download ONNX models
+---
 
-Download the following files from [Hugging Face - skytnt/waifu-gan](https://huggingface.co/skytnt/waifu-gan):
+## 📥 Model Download
+
+Manually download the following files from [skytnt/waifu-gan](https://huggingface.co/skytnt/waifu-gan):
 
 - `g_mapping.onnx`
 - `g_synthesis.onnx`
 
-Place them into the `./models/` folder.
+Put them into the `models/` directory:
+
+```bash
+mkdir models
+# Move downloaded ONNX models here
+```
+
+Or run the auto-downloader if provided:
+
+```bash
+python download_models.py
+```
 
 ---
 
-## 🌟 How to Use
+## 🌟 Usage
 
 ### ✨ Run the app:
 ```bash
 python fullbody_gan_app.py
 ```
 
-A **Gradio UI** will appear in your browser.
+A Gradio UI will launch in your browser with the following tabs:
 
-### ✅ Features:
+- **Generate Image**: Random or seed-based generation
+- **Batch Generation**: Create multiple images at once
+- **Video (Pair)**: Interpolate between two selected waifus
+- **Sequence Video**: Auto-generate and morph through a waifu series
 
-- **Generate**: Random or seed-based waifu generation
-- **Interpolate**: Select two waifus and create a smooth transition video
-- **Exported files**:
-  - `outputs/images/*.png`
-  - `outputs/videos/*.mp4`
+---
+
+## 📤 Output Files
+
+- Images → `outputs/images/`
+- Videos → `outputs/videos/`
+
+All generated content is saved automatically with seed and psi metadata in the filenames.
 
 ---
 
 ## 🧠 Model Info
 
-- Source: [https://huggingface.co/skytnt/waifu-gan](https://huggingface.co/skytnt/waifu-gan)
+- Source: [`skytnt/waifu-gan`](https://huggingface.co/skytnt/waifu-gan)
 - License: **Apache-2.0**
-- Input: latent vector `z` ∈ ℝ⁵¹²
-- Output: full-body anime character image (1024×512)
+- Input: latent vector `z ∈ ℝ⁵¹²`
+- Output: full-body anime-style character image (1024×512)
 
 ---
 
 ## 📄 License
 
-Apache License 2.0  
-See [LICENSE](LICENSE) for full text.
+This project is licensed under the [Apache License 2.0](LICENSE).
 
 ---
 
-## 💖 Credit
+## 💖 Credits
 
-- Model by [`skytnt`](https://huggingface.co/skytnt)
-- ONNX runtime interface and Gradio UI by [YourName](https://github.com/yourname)
+- Model: [`skytnt`](https://huggingface.co/skytnt)
+- Interface & ONNX Runtime integration: [Mainlst](https://github.com/Mainlst)
 
-Enjoy generating cute waifus! ✨
+---
+
+## ✨ Sample Output
+
+![waifu-sample](https://huggingface.co/skytnt/waifu-gan/resolve/main/sample.png)
+
+Enjoy generating and animating cute waifus with style 💕
+
+---
